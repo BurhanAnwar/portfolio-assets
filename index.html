@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muhammad Burhan Ud Din - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f0f4f8;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #cbd5e1,
+                #cbd5e1 10px,
+                #e2e8f0 10px,
+                #e2e8f0 20px
+            );
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Horizontal scroll container for swipe */
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .horizontal-scroll > div {
+            flex: 0 0 320px;
+            scroll-snap-align: start;
+        }
+        /* Hide scrollbar for WebKit browsers */
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .horizontal-scroll {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Card styling with gradient and hover effect */
+        .card {
+            background: linear-gradient(135deg, #ffffff, #f9fafb);
+            border: 1px solid #d1d5db;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="text/babel">
+        function Navbar() {
+            return (
+                <nav className="bg-teal-700 text-white p-4 sticky top-0 z-10 shadow-lg">
+                    <div className="container mx-auto flex justify-between items-center">
+                        <h1 className="text-2xl font-bold tracking-tight">Muhammad Burhan Ud Din</h1>
+                        <div className="space-x-6">
+                            <a href="#about" className="hover:text-teal-100 transition-colors duration-300">About</a>
+                            <a href="#education" className="hover:text-teal-100 transition-colors duration-300">Education</a>
+                            <a href="#experience" className="hover:text-teal-100 transition-colors duration-300">Experience</a>
+                            <a href="#projects" className="hover:text-teal-100 transition-colors duration-300">Projects</a>
+                            <a href="#skills" className="hover:text-teal-100 transition-colors duration-300">Skills</a>
+                            <a href="#certifications" className="hover:text-teal-100 transition-colors duration-300">Certifications</a>
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+
+        function Hero() {
+            return (
+                <section className="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="text-4xl font-bold mb-4">Data Scientist & Engineer</h2>
+                        <p className="text-lg mb-6 max-w-2xl mx-auto">
+                            Passionate about leveraging data to drive innovation and decision-making. Explore my projects and experience below.
+                        </p>
+                        <a
+                            href="https://raw.githubusercontent.com/BurhanAnwar/portfolio-assets/main/Muhammad_Burhan_Resume.pdf"
+                            download
+                            className="inline-block bg-white text-teal-700 px-6 py-3 rounded-lg font-semibold hover:bg-teal-100 transition-colors duration-300"
+                        >
+                            Download Resume
+                        </a>
+                    </div>
+                </section>
+            );
+        }
+
+        function Section({ id, title, children }) {
+            return (
+                <section id={id} className="py-16 fade-in">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-3xl font-bold mb-8 text-gray-800">{title}</h2>
+                        {children}
+                    </div>
+                </section>
+            );
+        }
+
+        function ExperienceCard({ title, company, location, duration, description }) {
+            return (
+                <div className="card">
+                    <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+                    <p className="text-gray-600">{company} | {location} | {duration}</p>
+                    <p className="mt-3 text-gray-700 leading-relaxed">{description}</p>
+                </div>
+            );
+        }
+
+        function ProjectCard({ title, company, description }) {
+            return (
+                <div className="card">
+                    <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+                    <p className="text-gray-600">{company}</p>
+                    <p className="mt-3 text-gray-700 leading-relaxed">{description}</p>
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Navbar />
+                    <Hero />
+                    <Section id="about" title="About Me">
+                        <div className="flex flex-col md:flex-row items-center">
+                            <img
+                                src="https://raw.githubusercontent.com/BurhanAnwar/portfolio-assets/main/portfolio.jpg"
+                                alt="Muhammad Burhan Ud Din"
+                                className="w-40 h-40 rounded-full mb-6 md:mb-0 md:mr-8 shadow-lg transition-transform duration-300 hover:scale-105"
+                            />
+                            <div>
+                                <p className="text-gray-700 leading-relaxed text-lg">
+                                    I am a highly organized individual with experience in Data Science at HBL Headquarters and Data Engineering at Dubizzle Labs. I am seeking a challenging opportunity to enhance my practical skills and contribute to impactful projects. My passion for becoming a Data Scientist is supported by a blend of creative and analytical abilities, which I have successfully applied in previous roles. I aim to leverage my expertise in data analysis and engineering to drive innovative solutions and support data-driven decision-making within a dynamic team environment.
+                                </p>
+                                <a
+                                    href="https://raw.githubusercontent.com/BurhanAnwar/portfolio-assets/main/Muhammad_Burhan_Resume.pdf"
+                                    download
+                                    className="mt-4 inline-block bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-300"
+                                >
+                                    Download My Resume
+                                </a>
+                            </div>
+                        </div>
+                    </Section>
+                    <Section id="education" title="Education">
+                        <div className="card">
+                            <h3 className="text-xl font-semibold text-gray-800">Bachelors in Data Science</h3>
+                            <p className="text-gray-600">National University of Computer and Emerging Sciences (FAST-NUCES), Lahore, Pakistan</p>
+                            <p className="text-gray-600">Aug 2021 - Present</p>
+                        </div>
+                    </Section>
+                    <Section id="experience" title="Experience">
+                        <div className="horizontal-scroll">
+                            <ExperienceCard
+                                title="Data Engineer Intern"
+                                company="Dubizzle Labs"
+                                location="Lahore, Pakistan"
+                                duration="Jul 2024 - Aug 2024"
+                                description="Worked on a competitive intelligence initiative using data engineering techniques to collect and analyze structured data from platforms such as Daraz and OLX. The insights informed pricing models, feature benchmarking, and UX enhancements, directly contributing to product growth. Gained hands-on experience in data pipelines and cross-functional collaboration."
+                            />
+                            <ExperienceCard
+                                title="Data Science Intern"
+                                company="HBL-Headquarters"
+                                location="Islamabad, Pakistan"
+                                duration="June 2023 - Aug 2023"
+                                description="Spearheaded a data science project analyzing raw loan and transaction data. Leveraged data modeling techniques to engineer new, aggregated features from diverse temporal datasets (daily, monthly, yearly), enhancing data utility. Developed an interactive Power BI dashboard to visualize loan transactions and key metrics, enabling actionable insights for stakeholders."
+                            />
+                        </div>
+                    </Section>
+                    <Section id="projects" title="Projects">
+                        <div className="horizontal-scroll">
+                            <ProjectCard
+                                title="AI Threat Intelligence System"
+                                company="FAST-NUCES & Ebryx"
+                                description="Built a web app that predicts phishing emails, detects network attacks, and analyzes user behavior using ML/DL. Used Python, Flask, TensorFlow, and Scikit-learn. Designed in line with real-world industry standards."
+                            />
+                            <ProjectCard
+                                title="Loan Analysis"
+                                company="HBL-Headquarters"
+                                description="Used data mining techniques and feature engineering for data preprocessing. Created an interactive dashboard in Power BI to visualize insights and support decision-making."
+                            />
+                            <ProjectCard
+                                title="Data Engineering"
+                                company="Dubizzle Labs"
+                                description="Designed and analyzed real-time product listing data from competitor platforms. Acquired hands-on expertise in scalable data extraction, REST API management, and converting raw web data into structured formats for strategic decision-making."
+                            />
+                            <ProjectCard
+                                title="Game Recommendation System"
+                                company="FAST-NUCES"
+                                description="A game recommendation system for streamers, integrating Natural Language Processing (NLP), Data Mining (DM), Machine Learning (ML), and Deep Learning (DL) techniques, implemented in Python."
+                            />
+                            <ProjectCard
+                                title="Landslide Prediction"
+                                company="FAST-NUCES"
+                                description="Used machine learning (ML) and deep learning (DL) models in Python to predict and categorize landslides based on geospatial and environmental data. Models provide early warnings to help manage and mitigate landslide risks."
+                            />
+                        </div>
+                    </Section>
+                    <Section id="skills" title="Technical Skills">
+                        <div className="card">
+                            <p className="text-gray-700 text-lg"><strong>Programming Languages:</strong> Python, C/C++, SQL, R, HTML, Assembly Language</p>
+                            <p className="text-gray-700 text-lg"><strong>Frameworks and Libraries:</strong> PySpark, Apache Hadoop, Selenium, Map Reduce</p>
+                            <p className="text-gray-700 text-lg"><strong>Tools and Platforms:</strong> Jupyter Notebook, Google Colab, Power BI, Microsoft Excel, Postman, Android Studio, Scrapy, HTTP Toolkit</p>
+                            <p className="text-gray-700 text-lg"><strong>Data Visualization:</strong> Matplotlib, Seaborn, pyplot, Plotly</p>
+                        </div>
+                    </Section>
+                    <Section id="certifications" title="Certifications">
+                        <div className="card">
+                            <p className="text-gray-700 text-lg">Specialization In Machine Learning - Stanford University (Coursera)</p>
+                        </div>
+                    </Section>
+                    <footer className="bg-teal-700 text-white p-6">
+                        <div className="container mx-auto text-center">
+                            <p className="text-lg">Contact: <a href="mailto:burhananwar89@gmail.com" className="underline hover:text-teal-100">burhananwar89@gmail.com</a> | +923281066668</p>
+                            <p className="mt-2">
+                                <a href="https://www.linkedin.com/in/burhananwar1" className="underline mx-2 hover:text-teal-100">LinkedIn</a> |
+                                <a href="https://github.com/BurhanAnwar" className="underline mx-2 hover:text-teal-100">GitHub</a>
+                            </p>
+                            <p className="mt-2">
+                                <a
+                                    href="https://raw.githubusercontent.com/BurhanAnwar/portfolio-assets/main/Muhammad_Burhan_Resume.pdf"
+                                    download
+                                    className="underline mx-2 hover:text-teal-100"
+                                >
+                                    Download Resume
+                                </a>
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
